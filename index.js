@@ -63,6 +63,7 @@ function clickColorBtn() {
     playSound("./sounds/" + this.id + ".mp3");
     if (checkIndex === level) {
       $("div.btn").off("click");
+      //此处不关闭事件监听，逻辑会出现错误，在新关卡未建立时，多次点击，results array增加新的值，导致判断错误。但未进入错误模式
       setTimeout(nextLevel, 1000);
     }
   } else {
