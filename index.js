@@ -1,6 +1,5 @@
 //随机数转换为颜色
 const colorDic = ["green", "red", "yellow", "blue"];
-console.log(colorDic.slice(1));
 //存储本次游戏的颜色序列
 var colorArray = [];
 //存储玩家的按键次序
@@ -22,59 +21,59 @@ $("button").on("click", startGame);
 //开始游戏
 function startGame() {
   //为色块增加点击监听事件，点击色块
+  $("div.btn").off("click");
   $("div.btn").on("click", clickColorBtn);
+  console.log("normal");
   colorArray = [];
   results = [];
   level = 0;
   checkIndex = 0;
-  $("button").hide();
+  //   $("button").hide();
   colorArray.push(randomColor());
-  console.log(colorArray);
   aniFun("#" + colorArray[level], "pressed");
   playSound("./sounds/" + colorArray[level] + ".mp3");
   level = level + 1;
   $("h1").text("Level " + level);
-  //   console.log(colorArray);
-  console.log("level:" + level);
-  console.log("checkIndex" + checkIndex);
+  console.log(colorArray, results, level, checkIndex);
 }
 
 //开始下一关
 function nextLevel() {
   colorArray.push(randomColor());
-  console.log(colorArray);
   aniFun("#" + colorArray[level], "pressed");
   playSound("./sounds/" + colorArray[level] + ".mp3");
   level = level + 1;
-  console.log("level:" + level);
   $("h1").text("Level " + level);
   results = [];
   checkIndex = 0;
-  console.log(results);
+  console.log(colorArray, results, level, checkIndex);
+  $("div.btn").on("click", clickColorBtn);
 }
 
 //点击色块操作
 function clickColorBtn() {
   aniFun("#" + this.id, "pressed");
   results.push(this.id);
-  console.log(results);
   checkIndex = checkIndex + 1;
-  console.log("checkIndex:" + checkIndex);
+  console.log(colorArray, results, level, checkIndex);
   if (
-    JSON.stringify(results.slice(0, checkIndex)) ===
+    JSON.stringify(results.slice(0, checkIndex)) ==
     JSON.stringify(colorArray.slice(0, checkIndex))
   ) {
     playSound("./sounds/" + this.id + ".mp3");
     if (checkIndex === level) {
+      $("div.btn").off("click");
       setTimeout(nextLevel, 1000);
     }
   } else {
     $("div.btn").off("click");
-    results = [];
-    checkIndex = 0;
     $("h1").text("Game Over");
     playSound("./sounds/wrong.mp3");
     aniFun("body", "game-over");
+    console.log(colorArray, results, level, checkIndex, "error");
+    $("div.btn").off("click");
+    $("div.btn").on("click", errorMode);
+    console.log("error");
     $("button").show();
     $("button").text("RESTART");
   }
@@ -82,6 +81,14 @@ function clickColorBtn() {
   //   const path = "sounds/" + soundPaths[key];
   //   playSound(path);
   //   animationFade(key);
+}
+
+//error mode
+function errorMode() {
+  aniFun("#" + this.id, "pressed");
+  playSound("./sounds/wrong.mp3");
+  aniFun("body", "game-over");
+  console.log(colorArray, results, level, checkIndex, "error");
 }
 
 //播放声音
