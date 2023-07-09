@@ -15,7 +15,7 @@ function randomColor() {
   return colorDic[index];
 }
 
-//为start button增加监听事件，开始游戏
+//为start button增加监听事件
 $("button").on("click", startGame);
 
 //开始游戏
@@ -70,17 +70,12 @@ function clickColorBtn() {
     $("h1").text("Game Over");
     playSound("./sounds/wrong.mp3");
     aniFun("body", "game-over");
-    console.log(colorArray, results, level, checkIndex, "error");
     $("div.btn").off("click");
     $("div.btn").on("click", errorMode);
     console.log("error");
     $("button").show();
     $("button").text("RESTART");
   }
-  //   const key = this.innerHTML;
-  //   const path = "sounds/" + soundPaths[key];
-  //   playSound(path);
-  //   animationFade(key);
 }
 
 //error mode
@@ -96,12 +91,6 @@ function playSound(path) {
   var sound = new Audio(path);
   sound.play();
 }
-
-// $("body").on("keydown", function (event) {
-//   const path = "sounds/" + soundPaths[event.key];
-//   playSound(path);
-//   animationFade(event.key);
-// });
 
 //对应元素，动画
 function aniFun(tag, className) {
