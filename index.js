@@ -69,6 +69,9 @@ function clickColorBtn() {
       setTimeout(nextLevel, 1000);
     }
   } else {
+    $("div.btn").off("click");
+    results = [];
+    checkIndex = 0;
     $("h1").text("Game Over");
     playSound("./sounds/wrong.mp3");
     aniFun("body", "game-over");

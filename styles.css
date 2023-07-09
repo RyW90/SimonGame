@@ -68,4 +68,7 @@ footer {
   font-family: "Press Start 2P", cursive;
   font-size: 1rem;
   color: #fef2bf;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
