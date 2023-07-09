@@ -28,7 +28,7 @@ function startGame() {
   results = [];
   level = 0;
   checkIndex = 0;
-  //   $("button").hide();
+  $("button").hide();
   colorArray.push(randomColor());
   aniFun("#" + colorArray[level], "pressed");
   playSound("./sounds/" + colorArray[level] + ".mp3");
